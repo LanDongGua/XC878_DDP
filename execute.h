@@ -1,7 +1,7 @@
 #ifndef _EXECUTE_H_
 #define _EXECUTE_H_
 
-
+#define    OFFSET_TIME_OF_CACULATE_HANG     80
 void execute_scan(void);
 
 void dele_id_card_for_input(ubyte id_card[]);

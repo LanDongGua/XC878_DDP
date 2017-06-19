@@ -202,17 +202,18 @@ void Scan_Hanger(void)
 		  b_Complete_Done_Key_Have_Done = 1;
 		  T0_5MS_count_complete_scan = 0;  
 		  ub_Soft_Complete_Count = 0;
+		  b_Get_Caculate_Hanger = 0;
 		  if(b_Start_Caculate_Hanger)
 		  {
 		      if(0 == uw_Have_Hanger_By_Soft)
 			  {
-			      uw_Have_Hanger_By_Soft = 	 (uw_T0_5MS_Count_For_Record_Hanger_Time + 20);    
+			      uw_Have_Hanger_By_Soft = 	 (uw_T0_5MS_Count_For_Record_Hanger_Time + OFFSET_TIME_OF_CACULATE_HANG);    
 			  }
 			  else 
 			  {
-			      if((uw_T0_5MS_Count_For_Record_Hanger_Time < uw_Have_Hanger_By_Soft))
+			      if(((uw_T0_5MS_Count_For_Record_Hanger_Time + OFFSET_TIME_OF_CACULATE_HANG) < uw_Have_Hanger_By_Soft))
 				  {
-					  uw_Have_Hanger_By_Soft = 	 (uw_T0_5MS_Count_For_Record_Hanger_Time + 20);
+					  uw_Have_Hanger_By_Soft = 	 (uw_T0_5MS_Count_For_Record_Hanger_Time + OFFSET_TIME_OF_CACULATE_HANG);
 				  }			      
 			  }		     		      
 		  }
@@ -223,19 +224,21 @@ void Scan_Hanger(void)
 	if(scan_complete)
 	{
 	    b_Complete_Done_Key_Have_Done = 0; 
+		T0_5MS_count_complete_scan = 0; 
 	}
 
 	if(uw_T0_5MS_Count_For_ADD_Hanger_Time > uw_Have_Hanger_By_Soft)
 	{
 	    b_COMPLETE_DONE_flag = 1;
-		uw_T0_5MS_Count_For_ADD_Hanger_Time = 20;
+		b_Get_Caculate_Hanger = 1;
+		uw_T0_5MS_Count_For_ADD_Hanger_Time = OFFSET_TIME_OF_CACULATE_HANG;
 		ub_Soft_Complete_Count++;
 	}
-	if(ub_Soft_Complete_Count > 4)
-	{
-	  //  b_Start_Caculate_Hanger = 0;    
-		ub_Soft_Complete_Count = 0;
-	}
+//	if(ub_Soft_Complete_Count > 10)
+//	{
+//	  //  b_Start_Caculate_Hanger = 0;    
+//		ub_Soft_Complete_Count = 0;
+//	}
 
 }
 
@@ -247,6 +250,11 @@ void execute_scan(void)
 	//进站动作命令标识
 	if(input_yj_flag)
 	{
+	    if(b_Get_Caculate_Hanger)
+		{
+		    b_Get_Caculate_Hanger = 0; 
+			T0_5MS_count_input += OFFSET_TIME_OF_CACULATE_HANG;
+		}
 	    
 		
 
@@ -288,6 +296,10 @@ void execute_scan(void)
 			
 			
 	  }	 
+	  if(Key)
+	  {
+	      ub_T0_5MS_count_scan_Key = 0;    
+	  }
 
 
 

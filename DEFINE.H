@@ -169,7 +169,7 @@ extern ubyte  pdata   T0_5MS_count1,	//count1¼ÆÊı¡£Ó¦ÓÃÓÚÅĞ¶ÏºÍÖ÷»úÍ¨ĞÅÊ±¼äÊÇ·ñ¹
 	
 extern bool   FRAME_start_1,     b_InPut_Enable,	b_Key_Flag,
   
-      FRAME_end_1, have_id_data,    input_yj_flag, 	b_input_yj_flag_for_have_find_same_idcard,	b_Complete_Done_Key_Have_Done, b_Start_Caculate_Hanger, 
+      FRAME_end_1, have_id_data,    input_yj_flag, 	b_input_yj_flag_for_have_find_same_idcard,	b_Complete_Done_Key_Have_Done, b_Start_Caculate_Hanger,    b_Get_Caculate_Hanger,
 	
 	       b_T0_5MS_flag, b_COMPLETE_DONE_flag;
 	  

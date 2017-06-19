@@ -13,7 +13,10 @@ void COMPLEGE_DONE_SCAN(void)
 	    b_COMPLETE_DONE_flag    =    0;
 		
 		T0_5MS_count_complete_scan  =  0;
-		
+		if(b_Get_Caculate_Hanger)
+		{
+		    uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD += OFFSET_TIME_OF_CACULATE_HANG;    
+		}
 	
 			if(b_input_yj_flag_for_have_find_same_idcard && (uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD < (ub_Protect_Too_Long_Hanger * 50)))
 			{
