@@ -722,6 +722,13 @@ switch(buff[3])
 		      UID2 = 0;
 			  UID3 = 0;
 			  UID4 = 0;
+			    ub_ID_To_Dele_For_Input[0] =  0;
+	
+				ub_ID_To_Dele_For_Input[1] =  0;
+	
+				ub_ID_To_Dele_For_Input[2] =  0;
+	
+				ub_ID_To_Dele_For_Input[3] =  0;
 		      switch(CAN_RX_BUFF[0])
 			  {
 			      case work_station:

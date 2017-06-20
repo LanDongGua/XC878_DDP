@@ -22,6 +22,7 @@ void COMPLEGE_DONE_SCAN(void)
 		}
 	
 			if(b_input_yj_flag_for_have_find_same_idcard && (uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD < (ub_Protect_Too_Long_Hanger * 50)))
+		//	if(b_input_yj_flag_for_have_find_same_idcard)
 			{
 				b_input_yj_flag_for_have_find_same_idcard = 0;  
 				uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD = 0; 
