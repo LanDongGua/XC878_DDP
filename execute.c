@@ -256,8 +256,6 @@ void execute_scan(void)
 			T0_5MS_count_input += OFFSET_TIME_OF_CACULATE_HANG;
 		}
 	    
-		
-
 		//进站延时，按100ms单位计算,5ms为计算尺度。
 		//比如1S延时，10 *20 = 200.   200*5 = 1000ms
 		if((in_out_time[0] * 20) <= T0_5MS_count_input)
