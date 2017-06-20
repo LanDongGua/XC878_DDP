@@ -227,18 +227,18 @@ void Scan_Hanger(void)
 		T0_5MS_count_complete_scan = 0; 
 	}
 
-	if(uw_T0_5MS_Count_For_ADD_Hanger_Time > uw_Have_Hanger_By_Soft)
+	if((uw_T0_5MS_Count_For_ADD_Hanger_Time > uw_Have_Hanger_By_Soft) && (uw_Have_Hanger_By_Soft != 0))
 	{
 	    b_COMPLETE_DONE_flag = 1;
 		b_Get_Caculate_Hanger = 1;
 		uw_T0_5MS_Count_For_ADD_Hanger_Time = OFFSET_TIME_OF_CACULATE_HANG;
 		ub_Soft_Complete_Count++;
 	}
-//	if(ub_Soft_Complete_Count > 10)
-//	{
-//	  //  b_Start_Caculate_Hanger = 0;    
-//		ub_Soft_Complete_Count = 0;
-//	}
+	if(ub_Soft_Complete_Count > 10)
+	{
+	    b_Start_Caculate_Hanger = 0;    
+		ub_Soft_Complete_Count = 0;
+	}
 
 }
 

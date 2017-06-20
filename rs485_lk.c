@@ -92,14 +92,14 @@ void rs485_lk_scan(void)
 	}
 
 	
-	if(RS485_LK_buff[2] != DEV_ADDR)
+	if(RS485_LK_buff[2] != 1)
 	{
 	    byte_count_rs485_lk = 0;
 	    FRAME_start_rs485_lk = 0;
 	    FRAME_end_rs485_lk   = 0;
 		b_check_have_lcd_key = 0;
 		ub_LoginStatus &= 0xBF;
-		rs_485_2_tx_func_fifo(SET_ADDRESS);	
+		rs_485_2_tx_func_fifo(SET_TEMP_ADDR);	
 	  
 	    return; 
 	}

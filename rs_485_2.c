@@ -37,22 +37,22 @@ void scan_rs_485_2(void)
 			    byte_count_rs485_lk = 0;
 	            FRAME_start_rs485_lk = 0;
 			    FRAME_end_rs485_lk   = 0;
-				send_Frame_data_rs485_lk(ASK, 0x13, DEV_ADDR, error_data, 0);
+				send_Frame_data_rs485_lk(ASK, 0x13, 1, error_data, 0);
 				send_command_rs485_2(RS485_LK_buff,0);
 				b_rs_485_2_traning = 1;
 			    break;
-			case SET_ADDRESS:
+			case SET_TEMP_ADDR:
 			    byte_count_rs485_lk = 0;
 	            FRAME_start_rs485_lk = 0;
 			    FRAME_end_rs485_lk   = 0;
-				temp_lcd_key_addr[0] = DEV_ADDR;
-				temp_lcd_key_addr[0] = (temp_lcd_key_addr[0] & 0xF0);
-				temp_lcd_key_addr[0] >>= 4;
-				temp_lcd_key_addr[0] = 	Hex_TurnTO_ASC(temp_lcd_key_addr[0]);
-				temp_lcd_key_addr[1] = DEV_ADDR;
-				temp_lcd_key_addr[1] = (temp_lcd_key_addr[1] & 0x0F);
-				temp_lcd_key_addr[1] = 	Hex_TurnTO_ASC(temp_lcd_key_addr[1]);
-				send_Frame_data_rs485_lk(SET_ADDRESS, 0x13, 0, temp_lcd_key_addr, 2);
+				temp_lcd_key_addr[0] = 0x30;
+//				temp_lcd_key_addr[0] = (temp_lcd_key_addr[0] & 0xF0);
+//				temp_lcd_key_addr[0] >>= 4;
+//				temp_lcd_key_addr[0] = 	Hex_TurnTO_ASC(temp_lcd_key_addr[0]);
+				temp_lcd_key_addr[1] = 0x31;
+//				temp_lcd_key_addr[1] = (temp_lcd_key_addr[1] & 0x0F);
+//				temp_lcd_key_addr[1] = 	Hex_TurnTO_ASC(temp_lcd_key_addr[1]);
+				send_Frame_data_rs485_lk(SET_TEMP_ADDR, 0x13, 0, temp_lcd_key_addr, 2);
 				send_command_rs485_2(RS485_LK_buff,2);
 				b_rs_485_2_traning = 1;
 			    break;
@@ -62,7 +62,7 @@ void scan_rs_485_2(void)
 			    byte_count_rs485_lk = 0;
 	            FRAME_start_rs485_lk = 0;
 			    FRAME_end_rs485_lk   = 0;
-				send_Frame_data_rs485_lk(CLEAR_LCD_ONE_LINE, 0x13, DEV_ADDR, error_data, 0);
+				send_Frame_data_rs485_lk(CLEAR_LCD_ONE_LINE, 0x13, 1, error_data, 0);
 				send_command_rs485_2(RS485_LK_buff,0);
 				b_rs_485_2_traning = 1;
 			    break;
@@ -70,7 +70,7 @@ void scan_rs_485_2(void)
 			    byte_count_rs485_lk = 0;
 	            FRAME_start_rs485_lk = 0;
 			    FRAME_end_rs485_lk   = 0;
-				send_Frame_data_rs485_lk(LOCK_KEY, 0x13, DEV_ADDR, error_data, 0);
+				send_Frame_data_rs485_lk(LOCK_KEY, 0x13, 1, error_data, 0);
 				send_command_rs485_2(RS485_LK_buff,0);
 				b_rs_485_2_traning = 1;
 			    break;
@@ -78,7 +78,7 @@ void scan_rs_485_2(void)
 			    byte_count_rs485_lk = 0;
 	            FRAME_start_rs485_lk = 0;
 			    FRAME_end_rs485_lk   = 0;
-				send_Frame_data_rs485_lk(UNLOCK_KEY, 0x13, DEV_ADDR, error_data, 0);
+				send_Frame_data_rs485_lk(UNLOCK_KEY, 0x13, 1, error_data, 0);
 				send_command_rs485_2(RS485_LK_buff,0);
 				b_rs_485_2_traning = 1;
 			    break;	
@@ -86,7 +86,7 @@ void scan_rs_485_2(void)
 			    byte_count_rs485_lk = 0;
 	            FRAME_start_rs485_lk = 0;
 			    FRAME_end_rs485_lk   = 0;
-				send_Frame_data_rs485_lk(DISPLAY_LCD_ONE_LINE, 0x13, DEV_ADDR, LCD_KEY_DATA, ub_Send_LCD_Data_Number_For_485);
+				send_Frame_data_rs485_lk(DISPLAY_LCD_ONE_LINE, 0x13, 1, LCD_KEY_DATA, ub_Send_LCD_Data_Number_For_485);
 				send_command_rs485_2(RS485_LK_buff,ub_Send_LCD_Data_Number_For_485);
 				Clear_LCD_Key_Data();
 				b_rs_485_2_traning = 1;

@@ -555,6 +555,11 @@ if(BROAD_ADDRESS == buff[2])
 				  ub_Protect_Too_Long_Hanger = 	CAN_RX_BUFF[1];
 				  write_parameter_to_flash();
 			      break;
+			  case STOP_CACULATE_HANG:
+			      b_Start_Caculate_Hanger = 0;    
+		          ub_Soft_Complete_Count = 0;
+				  uw_Have_Hanger_By_Soft = 0;				     
+			      break;
 			  case CLEAR_TEST_UID:
 			      UID1 = 0;
 				  UID2 = 0;

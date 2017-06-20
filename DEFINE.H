@@ -31,6 +31,7 @@
 //	#define  output_last_time                   0x04
 //	#define  loading_and_quit                   0x05
     #define  RFID_Freq_AND_Protect_Too_Long_Hanger         0x42
+	#define  STOP_CACULATE_HANG                 0x43
 
 
 

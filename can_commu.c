@@ -191,9 +191,9 @@ void can_send_data(ubyte Len)
 		    T0_INT_SCAN();
 		    if(T0_5MS_count_Waiting_CAN_Send_INTR_Flag > 2)
 			{	   
-			    Cancel_CAN_vTransmit(0);
-			    Recover_CAN_BUS();
-			    CAN_vInit();
+//			    Cancel_CAN_vTransmit(0);
+//			    Recover_CAN_BUS();
+//			    CAN_vInit();
 				b_CAN_tran_complete = 1;
 				b_CAN_Send_Fail_Flag = 1;	
 				j = frame_number;	
@@ -210,38 +210,38 @@ void can_send_data(ubyte Len)
 	}
 }
 
-
-void Recover_CAN_BUS(void)
-{
-    CAN_vWriteCANAddress(CAN_NCR0); // Addressing CAN_NCR0
-    CAN_DATA0 = 0x41;            // load NODE 0 control register[7-0]
-    CAN_vWriteEN(D0_VALID);
-
-	CAN_vWriteCANAddress(CAN_NECNT0);
-	CAN_DATA0 = 0x00;
-	CAN_DATA1 = 0x00;
-	CAN_DATA2 = 0x60;
-	CAN_DATA3 = 0x00;  
-	CAN_vWriteEN(ALL_DATA_VALID);
-
-	CAN_vWriteCANAddress(CAN_NCR0); // Addressing CAN_NCR0
-    CAN_vReadEN();               // Read Mode is Enabled
-    CAN_DATA0  &= ~0x41;         // reset INIT and CCE
-    CAN_vWriteEN(D0_VALID); 
-
-}
-
-
-void Cancel_CAN_vTransmit(ubyte ubObjNr)
-{
-    CAN_pushAMRegs();    //   PUSH the CAN Access Mediator Register
-
-    CAN_vWriteCANAddress(CAN_MOCTR(ubObjNr));  //Addressing CAN_MOCTR register
-    CAN_vWriteCANData(0x00000720);      // set TXRQ,TXEN0,TXEN1,MSGVAL
-
-    CAN_popAMRegs();    //   POP the CAN Access Mediator Register
-
-}
+//
+//void Recover_CAN_BUS(void)
+//{
+//    CAN_vWriteCANAddress(CAN_NCR0); // Addressing CAN_NCR0
+//    CAN_DATA0 = 0x41;            // load NODE 0 control register[7-0]
+//    CAN_vWriteEN(D0_VALID);
+//
+//	CAN_vWriteCANAddress(CAN_NECNT0);
+//	CAN_DATA0 = 0x00;
+//	CAN_DATA1 = 0x00;
+//	CAN_DATA2 = 0x60;
+//	CAN_DATA3 = 0x00;  
+//	CAN_vWriteEN(ALL_DATA_VALID);
+//
+//	CAN_vWriteCANAddress(CAN_NCR0); // Addressing CAN_NCR0
+//    CAN_vReadEN();               // Read Mode is Enabled
+//    CAN_DATA0  &= ~0x41;         // reset INIT and CCE
+//    CAN_vWriteEN(D0_VALID); 
+//
+//}
+//
+//
+//void Cancel_CAN_vTransmit(ubyte ubObjNr)
+//{
+//    CAN_pushAMRegs();    //   PUSH the CAN Access Mediator Register
+//
+//    CAN_vWriteCANAddress(CAN_MOCTR(ubObjNr));  //Addressing CAN_MOCTR register
+//    CAN_vWriteCANData(0x00000720);      // set TXRQ,TXEN0,TXEN1,MSGVAL
+//
+//    CAN_popAMRegs();    //   POP the CAN Access Mediator Register
+//
+//}
 
 void set_tx_can_dlc(ubyte dlc)
 {
