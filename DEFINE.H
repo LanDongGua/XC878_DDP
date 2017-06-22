@@ -110,7 +110,7 @@
 #define  Max_DevAddr    254   //×î´óÉè±¸µØÖ·
 #define  Execute_Last_Time    440   //½ø³öÕ¾¶¯×÷³ÖĞøÊ±¼ä,5msÒ»¸öµ¥Î»
 #define  Worker_RFID_Frequency    400   //Ô±¹¤¶Á¿¨Æ÷ÆµÂÊ,5msÒ»¸öµ¥Î»
-#define  Hanger_RFID_Frequency    40   //ÒÂ¼Ü¶Á¿¨Æ÷ÆµÂÊ,5msÒ»¸öµ¥Î»
+#define  Hanger_RFID_Frequency    30   //ÒÂ¼Ü¶Á¿¨Æ÷ÆµÂÊ,5msÒ»¸öµ¥Î»
 
 #define  HELLO            0x01					   //ÏàÓ¦µÄĞ­ÒéÃüÁî¡£
 #define  ACT       		  0x02
@@ -162,7 +162,7 @@
 //#define  scan_stop_moto_2  P3_7
 
 extern ubyte  ub_Have_BootLoader_APP;
-extern uword  pdata    T0_5MS_count_input, 	uw_T0_5MS_Count_For_Record_Hanger_Time, uw_T0_5MS_Count_For_ADD_Hanger_Time,
+extern uword  pdata uw_T0_5MS_Count_For_Check_Time,  test_data,  T0_5MS_count_input, T0_5MS_count_input_2, T0_5MS_count_input_3, 	uw_T0_5MS_Count_For_Record_Hanger_Time, uw_T0_5MS_Count_For_ADD_Hanger_Time,
                        uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD, uw_T0_5MS_count_For_CheckStation_For_TheSameCard;  //4¸ö5ºÁÃë¶¨Ê±¼ÆÊı±äÁ¿¡£·Ö±ğÓ¦ÓÃÓÚ£¬½øÕ¾´«¸ĞÆ÷Âú¡¢³öÕ¾´«¸ĞÆ÷Âú¡¢½øÕ¾³ÖĞøÊ±¼ä£¬³öÕ¾³ÖĞøÊ±¼äµÄ¶¨Ê±¡£
 extern ubyte  pdata   T0_5MS_count1,	//count1¼ÆÊı¡£Ó¦ÓÃÓÚÅĞ¶ÏºÍÖ÷»úÍ¨ĞÅÊ±¼äÊÇ·ñ¹ı³¤Ê±Ê¹ÓÃ¡£5msÒ»¸ö¼ÆÊı¡£	count_worker_idÓ¦ÓÃÓÚ¶¨Ê±É¨ÃèµÇÂ½¶Á¿¨Æ÷¡£
       T0_5MS_count_YJ_id,  T0_5MS_IDread_frame_count,  // count_YJ_idÓ¦ÓÃÓÚ¶¨Ê±É¨Ãè³öÕ¾´¦µÄ¶Á¿¨Æ÷¡£	 IDcard_send_count£¬·¢ËÍÍ¬Ò»¸öÒÂ¼Ü¿¨ºÅµÄ´ÎÊı¡£Âú¼¸´Îºó£¬·¢ËÍ±¾»ú×´Ì¬£¬Õë¶ÔaskÃüÁî¡£
@@ -170,7 +170,7 @@ extern ubyte  pdata   T0_5MS_count1,	//count1¼ÆÊı¡£Ó¦ÓÃÓÚÅĞ¶ÏºÍÖ÷»úÍ¨ĞÅÊ±¼äÊÇ·ñ¹
 	
 extern bool   FRAME_start_1,     b_InPut_Enable,	b_Key_Flag,
   
-      FRAME_end_1, have_id_data,    input_yj_flag, 	b_input_yj_flag_for_have_find_same_idcard,	b_Complete_Done_Key_Have_Done, b_Start_Caculate_Hanger,    b_Get_Caculate_Hanger,
+      FRAME_end_1, have_id_data,    input_yj_flag, input_yj_flag_2, input_yj_flag_3, 	b_input_yj_flag_for_have_find_same_idcard,	b_Complete_Done_Key_Have_Done, b_Start_Caculate_Hanger,    b_Get_Caculate_Hanger,
 	
 	       b_T0_5MS_flag, b_COMPLETE_DONE_flag;
 	  

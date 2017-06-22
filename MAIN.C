@@ -30,7 +30,7 @@
 
 // USER CODE BEGIN (MAIN_General,2)
 ubyte  ub_Have_BootLoader_APP;
-uword  pdata    T0_5MS_count_input, uw_T0_5MS_Count_For_Record_Hanger_Time, uw_T0_5MS_Count_For_ADD_Hanger_Time,
+uword  pdata uw_T0_5MS_Count_For_Check_Time, test_data,  T0_5MS_count_input, T0_5MS_count_input_2, T0_5MS_count_input_3, uw_T0_5MS_Count_For_Record_Hanger_Time, uw_T0_5MS_Count_For_ADD_Hanger_Time,
                 uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD, uw_T0_5MS_count_For_CheckStation_For_TheSameCard;  //4个5毫秒定时计数变量。分别应用于，进站传感器满、出站传感器满、进站持续时间，出站持续时间的定时。
 ubyte  pdata   T0_5MS_count1,	//count1计数。应用于判断和主机通信时间是否过长时使用。5ms一个计数。	count_worker_id应用于定时扫描登陆读卡器。
       T0_5MS_count_YJ_id,  T0_5MS_IDread_frame_count,  // count_YJ_id应用于定时扫描出站处的读卡器。	 IDcard_send_count，发送同一个衣架卡号的次数。满几次后，发送本机状态，针对ask命令。
@@ -38,7 +38,7 @@ ubyte  pdata   T0_5MS_count1,	//count1计数。应用于判断和主机通信时间是否过长时使
 	
 bool   FRAME_start_1,     b_InPut_Enable,	b_Key_Flag,
   
-      FRAME_end_1, have_id_data,    input_yj_flag, 	b_input_yj_flag_for_have_find_same_idcard,	   b_Complete_Done_Key_Have_Done,  b_Start_Caculate_Hanger,	b_Get_Caculate_Hanger,
+      FRAME_end_1, have_id_data,    input_yj_flag, input_yj_flag_2, input_yj_flag_3, 	b_input_yj_flag_for_have_find_same_idcard,	   b_Complete_Done_Key_Have_Done,  b_Start_Caculate_Hanger,	b_Get_Caculate_Hanger,
 	
 	       b_T0_5MS_flag, b_COMPLETE_DONE_flag;
 	  

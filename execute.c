@@ -198,28 +198,61 @@ void Scan_Hanger(void)
 {
     if((!scan_complete)&&(T0_5MS_count_complete_scan >= 2) && (!b_Complete_Done_Key_Have_Done))
 	  {
-	      b_COMPLETE_DONE_flag    =    1; 
+//	      test_data = uw_T0_5MS_Count_For_Check_Time;
+//		  can_tx_func_fifo(test);
+//          have_id_data = 0;
+	      b_COMPLETE_DONE_flag    =    1;  
+	      
+		  if(b_COMPLETE_DONE_flag)
+		  {
+		      if((uw_T0_5MS_Count_For_Record_Hanger_Time < 200) && (b_Start_Caculate_Hanger))
+			  {
+			      b_COMPLETE_DONE_flag = 0;
+			  }    
+		  }
+	      
 		  b_Complete_Done_Key_Have_Done = 1;
 		  T0_5MS_count_complete_scan = 0;  
 		  ub_Soft_Complete_Count = 0;
 		  b_Get_Caculate_Hanger = 0;
 		  if(b_Start_Caculate_Hanger)
-		  {
+		  {		      
 		      if(0 == uw_Have_Hanger_By_Soft)
 			  {
-			      uw_Have_Hanger_By_Soft = 	 (uw_T0_5MS_Count_For_Record_Hanger_Time + OFFSET_TIME_OF_CACULATE_HANG);    
-			  }
-			  else 
-			  {
-			      if(((uw_T0_5MS_Count_For_Record_Hanger_Time + OFFSET_TIME_OF_CACULATE_HANG) < uw_Have_Hanger_By_Soft))
+			      if((uw_T0_5MS_Count_For_Record_Hanger_Time  > 200) && (uw_T0_5MS_Count_For_Record_Hanger_Time < 360))
 				  {
-					  uw_Have_Hanger_By_Soft = 	 (uw_T0_5MS_Count_For_Record_Hanger_Time + OFFSET_TIME_OF_CACULATE_HANG);
-				  }			      
-			  }		     		      
+				      uw_Have_Hanger_By_Soft = 	 (uw_T0_5MS_Count_For_Record_Hanger_Time + OFFSET_TIME_OF_CACULATE_HANG); 
+				  }
+				  else
+				  {
+				      uw_Have_Hanger_By_Soft = 0;
+				  }
+			         
+			  }
+//			  else 
+//			  {
+//			      if(((uw_T0_5MS_Count_For_Record_Hanger_Time + OFFSET_TIME_OF_CACULATE_HANG) < uw_Have_Hanger_By_Soft))
+//				  {
+//
+//					  if((uw_T0_5MS_Count_For_Record_Hanger_Time  > 200) && (uw_T0_5MS_Count_For_Record_Hanger_Time < 360))
+//					  {
+//					      uw_Have_Hanger_By_Soft = 	 (uw_T0_5MS_Count_For_Record_Hanger_Time + OFFSET_TIME_OF_CACULATE_HANG); 
+//					  }
+//				  }			      
+//			  }		     		      
 		  }
 		  b_Start_Caculate_Hanger = 1;  
-		  uw_T0_5MS_Count_For_Record_Hanger_Time = 0;  
-		  uw_T0_5MS_Count_For_ADD_Hanger_Time = 0;  
+		  if(b_COMPLETE_DONE_flag)
+		  {
+			  uw_T0_5MS_Count_For_Record_Hanger_Time = 0;  
+			  uw_T0_5MS_Count_For_ADD_Hanger_Time = 0;
+		  }
+		    
+//		  if(!b_Start_Caculate_Hanger)
+//		  {
+//		      b_Start_Caculate_Hanger = 1;
+//			  uw_T0_5MS_Count_For_ADD_Hanger_Time = 0;
+//		  }
 	  }
 	if(scan_complete)
 	{
@@ -227,20 +260,85 @@ void Scan_Hanger(void)
 		T0_5MS_count_complete_scan = 0; 
 	}
 
-	if((uw_T0_5MS_Count_For_ADD_Hanger_Time > uw_Have_Hanger_By_Soft) && (uw_Have_Hanger_By_Soft != 0))
+	if((uw_T0_5MS_Count_For_ADD_Hanger_Time >= uw_Have_Hanger_By_Soft) && (uw_Have_Hanger_By_Soft != 0))
+  //  if((uw_T0_5MS_Count_For_ADD_Hanger_Time >= 300) && b_Start_Caculate_Hanger)
 	{
-	    b_COMPLETE_DONE_flag = 1;
+	   
+		b_COMPLETE_DONE_flag = 1;
+	   // Enable_Input_Done();
 		b_Get_Caculate_Hanger = 1;
 		uw_T0_5MS_Count_For_ADD_Hanger_Time = OFFSET_TIME_OF_CACULATE_HANG;
-		ub_Soft_Complete_Count++;
+	    
+	//	ub_Soft_Complete_Count++;
 	}
-	if(ub_Soft_Complete_Count > 10)
+//	if(ub_Soft_Complete_Count > 10)
+//	{
+//	    b_Start_Caculate_Hanger = 0;    
+//		ub_Soft_Complete_Count = 0;
+//	}
+
+    if(b_COMPLETE_DONE_flag)
 	{
-	    b_Start_Caculate_Hanger = 0;    
-		ub_Soft_Complete_Count = 0;
+	    b_COMPLETE_DONE_flag    =    0;
+		
+		T0_5MS_count_complete_scan  =  0;
+
+//		can_tx_func_fifo(SUCCESS_INPUT);
+//		input_yj_flag = 1;
+//		if(b_Get_Caculate_Hanger)
+//		{
+//		    //uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD += OFFSET_TIME_OF_CACULATE_HANG;    
+//			can_tx_func_fifo(Enable_Input);
+//		}
+//		else
+//		{
+//		    can_tx_func_fifo(test);
+//		}
+
+		//	if(b_input_yj_flag_for_have_find_same_idcard && (uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD < (ub_Protect_Too_Long_Hanger * 50)))
+		//	if(b_input_yj_flag_for_have_find_same_idcard && (uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD < (ub_Protect_Too_Long_Hanger * 50)))
+			if(b_input_yj_flag_for_have_find_same_idcard)
+			{
+				b_input_yj_flag_for_have_find_same_idcard = 0;  
+				uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD = 0; 
+
+				  if((!input_yj_flag) && (!input_yj_flag_2) && (!input_yj_flag_3))
+				  {
+				      T0_5MS_count_input    =    0;	
+					  input_yj_flag          =    1;
+					  
+				  }
+				  else if((input_yj_flag) && (!input_yj_flag_2))
+				  {
+				      T0_5MS_count_input_2 = 0;
+				      input_yj_flag_2 = 1;
+				  }
+				  else if((!input_yj_flag) && (input_yj_flag_2))
+				  {
+				      T0_5MS_count_input    =    0;	
+					  input_yj_flag          =    1;    
+				  }
+				  else if((input_yj_flag) && (input_yj_flag_2))
+				  {
+				      T0_5MS_count_input_3 = 0;
+				      input_yj_flag_3 = 1;    
+				  }
+				
+				
+				can_tx_func_fifo(SUCCESS_INPUT);
+			//	dele_id_card_for_input(ub_ID_To_Dele_For_Input);
+				
+			}
+			else
+			{
+			    b_input_yj_flag_for_have_find_same_idcard = 0; 
+				uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD = 0; 
+
+			}	    
 	}
 
 }
+
 
 
 //扫描执行动作函数
@@ -259,6 +357,7 @@ void execute_scan(void)
 		//进站延时，按100ms单位计算,5ms为计算尺度。
 		//比如1S延时，10 *20 = 200.   200*5 = 1000ms
 		if((in_out_time[0] * 20) <= T0_5MS_count_input)
+	//	if(80 <= T0_5MS_count_input)
 		{
 			//进站动作
 			INPUT_YJ_ENABLE    =    1;
@@ -266,11 +365,85 @@ void execute_scan(void)
 
 			//持续时间后撤销进站动作
 			if(((in_time_last*20) + (in_out_time[0]*20)) <= T0_5MS_count_input)
+		//	if(200 <= T0_5MS_count_input)
 			{	  
 				T0_5MS_count_input =    0;
 				input_yj_flag      =    0;
+				if((input_yj_flag || input_yj_flag_2 || input_yj_flag_3) == 0)
+				{
+				    INPUT_YJ_ENABLE    =    0;    
+				}
+
 				
-				INPUT_YJ_ENABLE    =    0;
+//				OUTPUT_YJ_ENABLE = 0;
+				
+			}		     
+		}
+	}
+
+
+	if(input_yj_flag_2)
+	{
+	    if(b_Get_Caculate_Hanger)
+		{
+		    b_Get_Caculate_Hanger = 0; 
+			T0_5MS_count_input_2 += OFFSET_TIME_OF_CACULATE_HANG;
+		}
+	    
+		//进站延时，按100ms单位计算,5ms为计算尺度。
+		//比如1S延时，10 *20 = 200.   200*5 = 1000ms
+		if((in_out_time[0] * 20) <= T0_5MS_count_input_2)
+	//	if(80 <= T0_5MS_count_input)
+		{
+			//进站动作
+			INPUT_YJ_ENABLE    =    1;
+//			OUTPUT_YJ_ENABLE = 1;
+
+			//持续时间后撤销进站动作
+			if(((in_time_last*20) + (in_out_time[0]*20)) <= T0_5MS_count_input_2)
+		//	if(200 <= T0_5MS_count_input)
+			{	  
+				T0_5MS_count_input_2 =    0;
+				input_yj_flag_2      =    0;
+				
+				if((input_yj_flag || input_yj_flag_2 || input_yj_flag_3) == 0)
+				{
+				    INPUT_YJ_ENABLE    =    0;    
+				}
+//				OUTPUT_YJ_ENABLE = 0;
+				
+			}		     
+		}
+	}
+
+	if(input_yj_flag_3)
+	{
+	    if(b_Get_Caculate_Hanger)
+		{
+		    b_Get_Caculate_Hanger = 0; 
+			T0_5MS_count_input_3 += OFFSET_TIME_OF_CACULATE_HANG;
+		}
+	    
+		//进站延时，按100ms单位计算,5ms为计算尺度。
+		//比如1S延时，10 *20 = 200.   200*5 = 1000ms
+		if((in_out_time[0] * 20) <= T0_5MS_count_input_3)
+	//	if(80 <= T0_5MS_count_input)
+		{
+			//进站动作
+			INPUT_YJ_ENABLE    =    1;
+//			OUTPUT_YJ_ENABLE = 1;
+
+			//持续时间后撤销进站动作
+			if(((in_time_last*20) + (in_out_time[0]*20)) <= T0_5MS_count_input_3)
+		//	if(200 <= T0_5MS_count_input)
+			{	  
+				T0_5MS_count_input_3 =    0;
+				input_yj_flag_3      =    0;
+				
+				if((input_yj_flag || input_yj_flag_2 || input_yj_flag_3) == 0)
+				{
+				    INPUT_YJ_ENABLE    =    0;    
+				}
 //				OUTPUT_YJ_ENABLE = 0;
 				
 			}		     

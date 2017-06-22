@@ -406,8 +406,10 @@ void can_tx_status_scan_function(void)
 			    break;
 			case test:
 			   
-				    HEART_INFO[0] = UID1;
-					HEART_INFO[1] = UID2;
+//				    HEART_INFO[0] = UID1;
+//					HEART_INFO[1] = UID2;
+                    HEART_INFO[0] = (ubyte)((test_data & 0xFF00) >>8);
+					HEART_INFO[1] = (ubyte)(test_data & 0x00FF);
 					HEART_INFO[2] = UID3;
 					HEART_INFO[3] = UID4;
 					HEART_INFO[4] = ub_LoginStatus;

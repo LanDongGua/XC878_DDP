@@ -7,8 +7,8 @@ void Idreader_scan(void)
 	bool have_id_data_temp;
 	have_id_data_temp    =    0;
 	  //
-	  if(((ub_RFID_Freq * 50) <= T0_5MS_count_YJ_id))
-	 // if(Hanger_RFID_Frequency <= T0_5MS_count_YJ_id)
+	 // if(((ub_RFID_Freq * 50) <= T0_5MS_count_YJ_id))
+	  if(Hanger_RFID_Frequency <= T0_5MS_count_YJ_id)
 	  {
 	      T0_5MS_count_YJ_id = 0;
 		  rs_485_2_tx_func_fifo(READ_ID_READER);	    
@@ -58,8 +58,7 @@ void Idreader_scan(void)
 				
 				IDCARD_data[3] =  ASC_TurnTO_Hex(send_data[11]);
 				IDCARD_data[3] <<= 4;
-				IDCARD_data[3] +=  ASC_TurnTO_Hex(send_data[12]);	
-			  have_id_data = 1;
+				IDCARD_data[3] +=  ASC_TurnTO_Hex(send_data[12]);				  
 			  if(STATION_type == check_station)
 			  {
 			      if(cmopare_IDcard(IDCARD_data, ub_ID_To_Dele_For_Input))
@@ -106,7 +105,9 @@ void Idreader_scan(void)
 			  {
 			      if(cmopare_IDcard(IDCARD_data, ub_ID_To_Dele_For_Input))
 				  {
-				      
+//				      have_id_data = 1; 
+//					  uw_T0_5MS_Count_For_Check_Time = 0;
+//				  				      
 					    if(UID2 < 250)
 					   {
 					       UID2++;
@@ -123,14 +124,6 @@ void Idreader_scan(void)
 	
 						ub_ID_To_Dele_For_Input[3] =  IDCARD_data[3];
 	
-	//					if(compare_id(id_for_card_buffer))
-	//					{
-	//					    b_input_yj_flag_for_have_find_same_idcard = 1;
-	//						test_id_card[0] =   0xff;
-	//					  test_id_card[1] =   0xff;
-	//					  test_id_card[2] =   0xff;
-	//					  test_id_card[3] =   0xff;
-	//					}
 						if(find_will_input_idcard(ub_ID_To_Dele_For_Input))
 						{
 						    if(b_InPut_Enable)

@@ -8,50 +8,7 @@ void COMPLEGE_DONE_SCAN(void)
 //≤‚ ‘”√ °£≤ª…®√ËÕ∆∏À
    // if((b_COMPLETE_DONE_flag))
 //   ubyte i;
-	if(b_COMPLETE_DONE_flag)
-	{
-	    b_COMPLETE_DONE_flag    =    0;
-		
-		T0_5MS_count_complete_scan  =  0;
-
-//		can_tx_func_fifo(SUCCESS_INPUT);
-//		input_yj_flag = 1;
-		if(b_Get_Caculate_Hanger)
-		{
-		    uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD += OFFSET_TIME_OF_CACULATE_HANG;    
-		}
-	
-			if(b_input_yj_flag_for_have_find_same_idcard && (uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD < (ub_Protect_Too_Long_Hanger * 50)))
-		//	if(b_input_yj_flag_for_have_find_same_idcard)
-			{
-				b_input_yj_flag_for_have_find_same_idcard = 0;  
-				uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD = 0; 
-				T0_5MS_count_input = 0;
-			    input_yj_flag = 1;  
-//				if(UID1 > 0)
-//			    {
-//			        UID1--;
-//			    }
-                if(UID3 < 250)
-			   {
-			       UID3++;
-			   }
-			   else
-			   {
-			       UID3 = 0;
-			   }
-				
-				can_tx_func_fifo(SUCCESS_INPUT);
-				
-			}
-			else
-			{
-			    b_input_yj_flag_for_have_find_same_idcard = 0; 
-				uw_T0_5MS_count_For_Waiting_Hanger_After_Got_IDCARD = 0; 
-
-			}	    
-	}
-
+//	
 	if(b_Success_To_Send_Success_Input)
 	{
 	    b_Success_To_Send_Success_Input = 0;
@@ -102,6 +59,32 @@ void T0_INT_SCAN(void)
 			 else
 			 {
 			     T0_5MS_count_input = 0;
+			 }
+		     
+		 }
+
+		 if(input_yj_flag_2)
+		 {
+		     if(T0_5MS_count_input_2 < 60000)
+			 {
+			     T0_5MS_count_input_2++;
+			 }
+			 else
+			 {
+			     T0_5MS_count_input_2 = 0;
+			 }
+		     
+		 }
+
+		 if(input_yj_flag_3)
+		 {
+		     if(T0_5MS_count_input_3 < 60000)
+			 {
+			     T0_5MS_count_input_3++;
+			 }
+			 else
+			 {
+			     T0_5MS_count_input_3 = 0;
 			 }
 		     
 		 }
@@ -176,6 +159,18 @@ void T0_INT_SCAN(void)
 		 {
 		     uw_T0_5MS_count_For_CheckStation_For_TheSameCard = 0;
 		 }
+		 if(have_id_data)
+		 {
+			 if(uw_T0_5MS_Count_For_Check_Time < 60000)
+			 {
+			     uw_T0_5MS_Count_For_Check_Time++;
+			 }
+			 else
+			 {
+			     uw_T0_5MS_Count_For_Check_Time = 0;
+			 }
+		 }
+		 
 
 		 if(b_Waiting_CAN_Send_Interupt_Flag)
 		{
