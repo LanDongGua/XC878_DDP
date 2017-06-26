@@ -12,6 +12,8 @@
 #define  EDIT_INIT_PAGE                    0x35
 #define  SET_TEMP_ADDR        0x71		 //lcd链接站位板的时候，因为只连着一块，每次开机的时候，临时设置他的地址为站位地址.为了不和flash里的地址冲突。
 #define  Toggle_485_232                    0x3A
+#define  DISPLAY_LCD_ONE_LINE_For_Set_ADDR                    0x3B
+
 
 #define  LCD_KEY_TO_PC        0x72
 

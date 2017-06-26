@@ -120,12 +120,23 @@ void rs485_lk_scan(void)
 		}
 		else
 		{
-		    if((byte_count_rs485_lk > 10) && (RS485_LK_buff[1] == RS485_LK_buff[2]) && (RS485_LK_buff[1] == 0x2A))
+		    if((byte_count_rs485_lk > 10) && (RS485_LK_buff[1] == RS485_LK_buff[2]) && (RS485_LK_buff[1] == 0x2A) && ((RS485_LK_buff[3] <= 0x32) && (RS485_LK_buff[3] >= 0x30)) && ((RS485_LK_buff[4] <= 0x39) && (RS485_LK_buff[4] >= 0x30)) && ((RS485_LK_buff[5] <= 0x39) && (RS485_LK_buff[5] >= 0x30)))
 			{
-			    DEV_ADDR =  ASC_TurnTO_Hex(RS485_LK_buff[3]);
-			    DEV_ADDR *= 10;
-			    DEV_ADDR +=  ASC_TurnTO_Hex(RS485_LK_buff[4]);
-			    write_parameter_to_flash();                 			      				  		  				 				 				  		
+			    if(((RS485_LK_buff[3] == 0x32) && (RS485_LK_buff[4] > 0x35)) || ((RS485_LK_buff[3] == 0x32) && (RS485_LK_buff[4] == 0x35) && (RS485_LK_buff[5] > 0x34)) || ((RS485_LK_buff[3] == 0x30) && (RS485_LK_buff[4] == 0x30) && (RS485_LK_buff[5] == 0x30)))
+				{
+				    can_tx_func_fifo(LCD_KEY_TO_PC); 
+				}
+				else
+				{
+					DEV_ADDR =  ASC_TurnTO_Hex(RS485_LK_buff[3]);
+				    DEV_ADDR *= 100;
+				    DEV_ADDR +=  (ASC_TurnTO_Hex(RS485_LK_buff[4]) * 10);
+					DEV_ADDR +=  ASC_TurnTO_Hex(RS485_LK_buff[5]);
+				    write_parameter_to_flash();                 			      				  		  				 				 				  		
+					For_Set_Addr_Display_Func(DEV_ADDR);	
+					rs_485_2_tx_func_fifo(DISPLAY_LCD_ONE_LINE_For_Set_ADDR); 
+				}
+			    			
 			}
 		
 			can_tx_func_fifo(LCD_KEY_TO_PC);   

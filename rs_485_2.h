@@ -1,6 +1,8 @@
 #ifndef _RS_485_2_H_
 #define _RS_485_2_H_
+extern ubyte pdata FoR_Set_ADDR_Display[18];
 
+void For_Set_Addr_Display_Func(ubyte Board_DEV_ADDR);
 void scan_rs_485_2(void);
 void rs_485_2_tx_status(void);
 bool compare_command_rs_485_2(ubyte tx_function_for_compare);

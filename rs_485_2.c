@@ -1,5 +1,28 @@
 #include "MAIN.H" 
 
+ubyte pdata FoR_Set_ADDR_Display[18];
+
+void For_Set_Addr_Display_Func(ubyte Board_DEV_ADDR)
+{
+    ubyte i, n;
+	char * s = "Success ";
+	n = 0;
+	FoR_Set_ADDR_Display[0]	 = (0x34 - 0x15);
+	for(i = 0; *(s +i) != '\0'; i++)
+	{
+	    FoR_Set_ADDR_Display[i + 1] = (ubyte)(*(s +i) - 0x15);  
+		n++;
+		  
+	}
+	i = (Board_DEV_ADDR / 100);
+	FoR_Set_ADDR_Display[n + 1]	 =  (Hex_TurnTO_ASC(i) - 0x15);
+	i = ((Board_DEV_ADDR % 100)/10);
+	FoR_Set_ADDR_Display[n + 2]	 = 	(Hex_TurnTO_ASC(i)  - 0x15);
+	i = (Board_DEV_ADDR % 10);
+	FoR_Set_ADDR_Display[n + 3]	 =  (Hex_TurnTO_ASC(i)  - 0x15);
+
+
+}
 
 void scan_rs_485_2(void)
 {
@@ -54,6 +77,14 @@ void scan_rs_485_2(void)
 //				temp_lcd_key_addr[1] = 	Hex_TurnTO_ASC(temp_lcd_key_addr[1]);
 				send_Frame_data_rs485_lk(SET_TEMP_ADDR, 0x13, 0, temp_lcd_key_addr, 2);
 				send_command_rs485_2(RS485_LK_buff,2);
+				b_rs_485_2_traning = 1;
+			    break;
+            case DISPLAY_LCD_ONE_LINE_For_Set_ADDR:
+			    byte_count_rs485_lk = 0;
+	            FRAME_start_rs485_lk = 0;
+			    FRAME_end_rs485_lk   = 0;
+				send_Frame_data_rs485_lk(DISPLAY_LCD_ONE_LINE, 0x13, 1, FoR_Set_ADDR_Display, 12);
+				send_command_rs485_2(RS485_LK_buff,12);
 				b_rs_485_2_traning = 1;
 			    break;
 			   
