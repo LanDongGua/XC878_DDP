@@ -15,6 +15,15 @@
 
 #define  LCD_KEY_TO_PC        0x72
 
+#define  EnterToPC          0x15
+#define  MenuToPC           0x16
+#define  SwitchToPC         0x10
+#define  BackToPC           0x17
+#define  PgUpToPC           0x11
+#define  LogOutToPC         0x14
+#define  LogInToPC          0x13
+#define  PgDnToPC           0x12
+
 
 
 void rs485_lk_scan(void);

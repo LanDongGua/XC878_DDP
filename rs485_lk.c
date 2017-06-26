@@ -113,9 +113,27 @@ void rs485_lk_scan(void)
 		{
 		    RS485_LK_buff[i] = RS485_LK_buff[i + 3];
 		}
+
+		if(RS485_LK_buff[0] != PgDnToPC)  
+		{
+		    can_tx_func_fifo(LCD_KEY_TO_PC);   
+		}
+		else
+		{
+		    if((byte_count_rs485_lk > 10) && (RS485_LK_buff[1] == RS485_LK_buff[2]) && (RS485_LK_buff[1] == 0x2A))
+			{
+			    DEV_ADDR =  ASC_TurnTO_Hex(RS485_LK_buff[3]);
+			    DEV_ADDR *= 10;
+			    DEV_ADDR +=  ASC_TurnTO_Hex(RS485_LK_buff[4]);
+			    write_parameter_to_flash();                 			      				  		  				 				 				  		
+			}
+		
+			can_tx_func_fifo(LCD_KEY_TO_PC);   
+			
+		}
 	   
 	    //b_have_LCD_KEY_DATA = 1;   
-		can_tx_func_fifo(LCD_KEY_TO_PC);    		 
+	//	can_tx_func_fifo(LCD_KEY_TO_PC);    		 
 	}
     
 
