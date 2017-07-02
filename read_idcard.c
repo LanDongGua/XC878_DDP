@@ -90,13 +90,13 @@ void Idreader_scan(void)
 					      can_tx_func_fifo(YJ_ID);    
 						  uw_T0_5MS_count_For_CheckStation_For_TheSameCard = 0;	
 						  if(UID4 < 250)
-				   {
-				       UID4++;
-				   }
-				   else
-				   {
-				       UID4 = 0;
-				   }				
+						   {
+						       UID4++;
+						   }
+						   else
+						   {
+						       UID4 = 0;
+						   }				
 					  }
 				  }
 				  
